@@ -27,17 +27,28 @@
         />
       </router-link>
     </div>
-    <!--  -->
     <div class="nav-list">
-      <a
-        href=""
-        class="nav-category"
-        @mouseenter="is_category_hover = true"
-        @mouseleave="is_category_hover = false"
-      >
-        <img :src="computed_src" alt="햄버거 메뉴 아이콘" />
-        <span class="text-category">전체 카테고리</span>
-      </a>
+      <div class="nav-dropdown">
+        <a
+          href="#none"
+          class="nav-dropdown-btn"
+          @mouseenter="is_category_hover = true"
+          @mouseleave="is_category_hover = false"
+        >
+          <i class="fas fa-bars"></i>
+          <span class="dropdown-btn-text">전체 카테고리</span>
+        </a>
+        <div class="nav-dropdown-content">
+          <a
+            href="#none"
+            class="nav-dropdown-content-wrapper"
+            v-for="cat in categories"
+            :key="cat"
+          >
+            <span class="item-content">{{ cat }}</span>
+          </a>
+        </div>
+      </div>
       <ul class="nav-category-list">
         <li class="category-item">
           <router-link to="/product/new" class="category-link"
@@ -56,6 +67,7 @@
           <router-link to="/" class="category-link">금주혜택</router-link>
         </li>
       </ul>
+
       <div class="nav-search-and-icons">
         <div class="search-box">
           <input class="search-input" type="text" />
@@ -90,16 +102,21 @@
   export default {
     name: "MainNav",
     data: () => ({
-      is_category_hover: false
+      is_category_hover: false,
+      categories: ["채소", "과일", "수산", "정육", "기타", "등등"]
     }),
-    computed: {
-      computed_src() {
-        return this.is_category_hover
-          ? "https://res.kurly.com/pc/service/common/1908/ico_gnb_all.png"
-          : "https://res.kurly.com/pc/service/common/1908/ico_gnb_all_off.png";
+    watch: {
+      is_category_hover: function (newVal) {
+        // var category = document.querySelector(".nav-category");
+        if (newVal === true) {
+          // category.classList.add("on");
+          // document.querySelector(".nav-dropdown-content").style.display = "block";
+        } else {
+          // category.classList.remove("on");
+          // document.querySelector(".nav-dropdown-content").style.display = "none";
+        }
       }
-    },
-    methods: {}
+    }
   };
 </script>
 
@@ -112,17 +129,18 @@
     padding: 0 100px;
     z-index: 9;
     background-color: #fff;
-    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
     .nav-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 1050px;
       height: 37px;
+      margin: 0 auto;
       //   border-bottom: 1px solid;
       .ad-link {
-        padding: 5px 7px;
-        font-size: 10px;
-        border: 1px solid grey;
+        padding: 3px 5px;
+        font-size: 11px;
+        border: 1px solid #d1d1d1;
         border-radius: 40px;
         color: grey;
         .kurly-active-text {
@@ -144,7 +162,9 @@
     }
     .nav-body {
       position: relative;
+      width: 1050px;
       height: 63px;
+      margin: 0 auto;
       .main-logo-wrap {
         position: absolute;
         display: block;
@@ -164,14 +184,36 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 1050px;
       height: 55px;
+      margin: 0 auto;
       font-weight: 700;
-      .nav-category {
-        .text-category {
-          margin-left: 10px;
+      .nav-dropdown {
+        position: relative;
+        display: inline-block;
+        .nav-dropdown-btn {
+          &:hover {
+            color: var(--kurly-color);
+          }
+        }
+        .nav-dropdown-content {
+          display: none;
+          position: absolute;
+          min-width: 160px;
+          background-color: #fff;
+          margin: 0 auto;
+          .nav-dropdown-content-wrapper {
+            padding: 4px 4px;
+          }
         }
         &:hover {
-          color: #5f0080;
+          .nav-dropdown-content {
+            display: block;
+            .nav-dropdown-content-wrapper {
+              display: flex;
+              flex-direction: column;
+            }
+          }
         }
       }
       .nav-category-list {
@@ -192,7 +234,6 @@
       }
       .nav-search-and-icons {
         display: flex;
-
         .search-box {
           display: flex;
           align-items: center;
@@ -200,9 +241,15 @@
           border: 1px solid #f7f7f6;
           border-radius: 18px;
           background-color: #f7f7f7;
-
+          &:focus {
+            background-color: #c4c4c4;
+          }
           .search-input {
             background-color: inherit;
+            line-height: 2em;
+            &:focus {
+              background-color: #c4c4c4;
+            }
           }
           .search-btn {
             display: inline-block;
