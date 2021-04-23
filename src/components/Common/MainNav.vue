@@ -35,17 +35,22 @@
           @mouseenter="is_category_hover = true"
           @mouseleave="is_category_hover = false"
         >
-          <i class="fas fa-bars"></i>
-          <span class="dropdown-btn-text">전체 카테고리</span>
+          <div class="nav-dropdown-btn-content">
+            <i class="fas fa-bars"></i>
+            <span class="dropdown-btn-text">전체 카테고리</span>
+          </div>
         </a>
         <div class="nav-dropdown-content">
           <a
             href="#none"
             class="nav-dropdown-content-wrapper"
-            v-for="cat in categories"
-            :key="cat"
+            v-for="category in categories"
+            :key="category.name"
           >
-            <span class="item-content">{{ cat }}</span>
+            <div class="content-item">
+              <i :class="category.ico"></i>
+              <span class="item-type">{{ category.name }}</span>
+            </div>
           </a>
         </div>
       </div>
@@ -103,7 +108,13 @@
     name: "MainNav",
     data: () => ({
       is_category_hover: false,
-      categories: ["채소", "과일", "수산", "정육", "기타", "등등"]
+      categories: [
+        { name: "채소", ico: "fas fa-seedling" },
+        { name: "과일·견과·쌀", ico: "fas fa-apple-alt" },
+        { name: "수산", ico: "fas fa-fish" },
+        { name: "정육", ico: "fas fa-drumstick-bite" },
+        { name: "기타", ico: "fas fa-ellipsis-h" }
+      ]
     }),
     watch: {
       is_category_hover: function (newVal) {
@@ -191,28 +202,58 @@
       .nav-dropdown {
         position: relative;
         display: inline-block;
+        height: 55px;
         .nav-dropdown-btn {
           &:hover {
             color: var(--kurly-color);
+          }
+          .nav-dropdown-btn-content {
+            position: relative;
+            top: 30%;
+            .dropdown-btn-text {
+              width: 100%;
+              height: 100%;
+              margin: 0 34px 0px 12px;
+            }
           }
         }
         .nav-dropdown-content {
           display: none;
           position: absolute;
+          top: 55px;
           min-width: 160px;
           background-color: #fff;
-          margin: 0 auto;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          border-radius: 5px;
+
           .nav-dropdown-content-wrapper {
-            padding: 4px 4px;
+            padding: 12px 12px;
+            // margin: 15px;
+            display: flex;
+            flex-direction: column;
+            .content-item {
+              display: flex;
+              justify-content: space-between;
+              // margin: 8px 12px 8px 12px;
+              width: 100%;
+              i {
+                width: 20%;
+              }
+              .item-type {
+                // margin-left: 15px;
+                width: 80%;
+                font-weight: 300;
+              }
+            }
+            &:hover {
+              background-color: #f5f5f5;
+              color: var(--kurly-color);
+            }
           }
         }
         &:hover {
           .nav-dropdown-content {
             display: block;
-            .nav-dropdown-content-wrapper {
-              display: flex;
-              flex-direction: column;
-            }
           }
         }
       }
