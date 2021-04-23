@@ -21,11 +21,11 @@
       images: [
         "https://img-cf.kurly.com/shop/data/main/1/pc_img_1618996028.jpg",
         "https://img-cf.kurly.com/shop/data/main/1/pc_img_1618485461.jpg",
-        "https://img-cf.kurly.com/shop/data/main/1/pc_img_1617955868.jpg"
+        "https://user-images.githubusercontent.com/65759076/115874178-c4d41500-a47e-11eb-8911-90395b33e669.png"
       ],
       slides: document.querySelector(".slides"),
       slide: document.querySelectorAll(".slides .slide-list"),
-      slideWidth: 1920,
+      slideWidth: 1900,
       slideMargin: 30,
       currentIdx: 0,
       slideCount: 3,
@@ -78,7 +78,7 @@
   }
   .sliding-wrap {
     position: relative;
-    width: 1920px;
+    width: 100%;
     height: 374px;
     margin: 0;
     padding: 0;
@@ -89,7 +89,7 @@
       transition: left 0.5s ease-in-out;
       .slide-list {
         .slide-image {
-          width: 1920px;
+          width: 1900px;
         }
       }
       li:not(:last-child) {
@@ -99,14 +99,15 @@
     }
     .prev-btn,
     .next-btn {
+      font-size: 150%;
       position: absolute;
       display: inline-block;
-      left: 15%;
+      left: 5%;
       transform: translate(-50%, -50%);
       top: 50%;
     }
     .next-btn {
-      left: 85%;
+      left: 95%;
     }
     .fa-chevron-circle-left,
     .fa-chevron-circle-right {
