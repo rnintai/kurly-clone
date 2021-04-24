@@ -1,16 +1,16 @@
 <template>
   <div class="Product view">
-    {{ this.$route.params.category }}
+    <product-card></product-card>
   </div>
 </template>
 
 <script>
+  import ProductCard from "@/components/Common/ProductCard.vue";
+
   export default {
-    name: "Product"
+    name: "Product",
+    components: { ProductCard }
   };
 </script>
 
-<style lang="scss" scoped>
-  .Product {
-  }
-</style>
+<style lang="scss" scoped></style>

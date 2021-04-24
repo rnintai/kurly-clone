@@ -137,8 +137,8 @@
     top: 0;
     left: 0;
     right: 0;
-    padding: 0 100px;
     z-index: 9;
+    padding: 0 100px;
     background-color: #fff;
     .nav-header {
       display: flex;
@@ -282,15 +282,10 @@
           border: 1px solid #f7f7f6;
           border-radius: 18px;
           background-color: #f7f7f7;
-          &:focus {
-            background-color: #c4c4c4;
-          }
+
           .search-input {
             background-color: inherit;
             line-height: 2em;
-            &:focus {
-              background-color: #c4c4c4;
-            }
           }
           .search-btn {
             display: inline-block;

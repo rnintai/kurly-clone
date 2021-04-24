@@ -23,14 +23,10 @@
         "https://img-cf.kurly.com/shop/data/main/1/pc_img_1618485461.jpg",
         "https://user-images.githubusercontent.com/65759076/115874178-c4d41500-a47e-11eb-8911-90395b33e669.png"
       ],
-      slides: document.querySelector(".slides"),
-      slide: document.querySelectorAll(".slides .slide-list"),
-      slideWidth: 1900,
+      slideWidth: 1520,
       slideMargin: 30,
       currentIdx: 0,
-      slideCount: 3,
-      prevBtn: document.querySelector(".prev-btn"),
-      nextBtn: document.querySelector(".next-btn")
+      slideCount: 3
     }),
     computed: {
       slides_width() {
@@ -79,7 +75,7 @@
   .sliding-wrap {
     position: relative;
     width: 100%;
-    height: 374px;
+    height: 300px;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -89,7 +85,8 @@
       transition: left 0.5s ease-in-out;
       .slide-list {
         .slide-image {
-          width: 1900px;
+          max-width: 1520px;
+          min-width: 1000px;
         }
       }
       li:not(:last-child) {
