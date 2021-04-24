@@ -1,6 +1,6 @@
 <template>
   <div class="sliding-wrap">
-    <ul class="slides" :style="slides_width">
+    <ul class="slides">
       <li class="slide-list" v-for="image in images" :key="image">
         <img class="slide-image" :src="image" alt="배너1" />
       </li>
@@ -23,19 +23,11 @@
         "https://img-cf.kurly.com/shop/data/main/1/pc_img_1618485461.jpg",
         "https://user-images.githubusercontent.com/65759076/115874178-c4d41500-a47e-11eb-8911-90395b33e669.png"
       ],
-      slideWidth: 1520,
-      slideMargin: 30,
+      slideWidth: 1581,
+      slideMargin: 0,
       currentIdx: 0,
       slideCount: 3
     }),
-    computed: {
-      slides_width() {
-        var width =
-          (this.slideWidth + this.slideMargin) * this.slideCount -
-          this.slideMargin;
-        return "width: " + width + "px";
-      }
-    },
     methods: {
       prevClick() {
         let cur = this.currentIdx;
@@ -56,10 +48,12 @@
         this.RmoveSlide(slides, cur);
       },
       RmoveSlide(slides, num) {
-        slides.style.left = num * (-this.slideWidth - this.slideMargin) + "px";
+        var width = document.querySelector(".slide-image").clientWidth;
+        slides.style.left = num * -width + "px";
       },
       LmoveSlide(slides, num) {
-        slides.style.left = num * (-this.slideWidth + -this.slideMargin) + "px";
+        var width = document.querySelector(".slide-image").clientWidth;
+        slides.style.left = num * -width + "px";
       }
     }
   };
@@ -81,18 +75,22 @@
     overflow: hidden;
     .slides {
       position: absolute;
+      width: 300%;
+      height: 300px;
       left: 0;
       transition: left 0.5s ease-in-out;
       .slide-list {
+        display: inline-block;
+        width: 33.3%;
         .slide-image {
-          max-width: 1520px;
-          min-width: 1000px;
+          width: 100%;
+          min-width: 1150px;
         }
       }
-      li:not(:last-child) {
-        float: left;
-        margin-right: 30px;
-      }
+      // li:not(:last-child) {
+      //   float: left;
+      //   margin-right: 30px;
+      // }
     }
     .prev-btn,
     .next-btn {

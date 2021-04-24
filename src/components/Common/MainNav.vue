@@ -27,6 +27,7 @@
         />
       </router-link>
     </div>
+    <!--  -->
     <div class="nav-list">
       <div class="nav-dropdown">
         <a
@@ -66,10 +67,14 @@
           >
         </li>
         <li class="category-item">
-          <router-link to="/" class="category-link">알뜰쇼핑</router-link>
+          <router-link to="/product/al" class="category-link"
+            >알뜰쇼핑</router-link
+          >
         </li>
         <li class="category-item">
-          <router-link to="/" class="category-link">금주혜택</router-link>
+          <router-link to="/product/week" class="category-link"
+            >금주혜택</router-link
+          >
         </li>
       </ul>
 
@@ -85,13 +90,18 @@
           </a>
         </div>
         <ul class="icon-list">
-          <li id="cart-icon" class="icon-item">
-            <img
-              src="https://res.kurly.com/pc/ico/2008/ico_delivery_setting.svg?ver=1"
-              alt=""
-            />
+          <li class="icon-location">
+            <button class="icon-location-button"></button>
+            <div class="no-address">
+              <span class="emph">배송지를 등록</span>하고<br />
+              구매 가능한 상품을 확인하세요!
+              <div class="no-address-buttons">
+                <button class="no-address-login">로그인</button>
+                <button class="no-address-search">주소 검색</button>
+              </div>
+            </div>
           </li>
-          <li class="icon-item">
+          <li class="icon-cart">
             <img
               src="https://res.kurly.com/pc/service/common/2011/ico_cart.svg"
               alt=""
@@ -115,19 +125,7 @@
         { name: "정육", ico: "fas fa-drumstick-bite" },
         { name: "기타", ico: "fas fa-ellipsis-h" }
       ]
-    }),
-    watch: {
-      is_category_hover: function (newVal) {
-        // var category = document.querySelector(".nav-category");
-        if (newVal === true) {
-          // category.classList.add("on");
-          // document.querySelector(".nav-dropdown-content").style.display = "block";
-        } else {
-          // category.classList.remove("on");
-          // document.querySelector(".nav-dropdown-content").style.display = "none";
-        }
-      }
-    }
+    })
   };
 </script>
 
@@ -140,6 +138,7 @@
     z-index: 9;
     padding: 0 100px;
     background-color: #fff;
+    box-shadow: 0 0px 22px 0 rgba(0, 0, 0, 0.2);
     .nav-header {
       display: flex;
       justify-content: space-between;
@@ -275,14 +274,15 @@
       }
       .nav-search-and-icons {
         display: flex;
+        align-items: center;
         .search-box {
           display: flex;
           align-items: center;
           padding-left: 14px;
+          height: 50%;
           border: 1px solid #f7f7f6;
           border-radius: 18px;
           background-color: #f7f7f7;
-
           .search-input {
             background-color: inherit;
             line-height: 2em;
@@ -298,10 +298,61 @@
           }
         }
         .icon-list {
-          #cart-icon {
-            padding: 0 15px;
+          .icon-location {
+            display: inline-block;
+            padding: 15px 15px;
+            .icon-location-button {
+              width: 36px;
+              height: 36px;
+              background-image: url("https://res.kurly.com/pc/ico/2008/ico_delivery_setting.svg?ver=1");
+            }
+
+            &:hover {
+              .icon-location-button {
+                background-image: url("https://res.kurly.com/pc/ico/2010/ico_delivery_setting_on.svg");
+              }
+              .no-address {
+                display: block;
+              }
+            }
+            .no-address {
+              display: none;
+              position: absolute;
+              top: 155px;
+              right: 291px;
+              width: 250px;
+              padding: 20px 18px;
+              border: 1px solid #ddd;
+              background-color: #fff;
+              .emph {
+                font-weight: 600;
+                color: var(--kurly-color);
+              }
+              .no-address-buttons {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 17px;
+                .no-address-login,
+                .no-address-search {
+                  padding: 10px 25px;
+                  border: 1px solid var(--kurly-color);
+                  border-radius: 3px;
+                  cursor: pointer;
+                }
+                .no-address-login {
+                  color: var(--kurly-color);
+                  width: 40%;
+                }
+                .no-address-search {
+                  margin-left: 10px;
+                  width: 60%;
+                  background-color: var(--kurly-color);
+                  color: #fff;
+                }
+              }
+            }
           }
-          .icon-item {
+          .icon-cart {
             display: inline-block;
           }
         }

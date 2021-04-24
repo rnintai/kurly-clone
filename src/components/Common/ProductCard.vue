@@ -1,10 +1,20 @@
 <template>
   <div class="product-card-frame">
     <div class="product-card" v-for="product in product_data" :key="product.id">
-      <img :src="product.thumb" alt="상품 썸네일" class="product-card-thumb" />
-      <span class="product-name">{{ product.name }}</span>
-      <span class="product-cost">{{ product.cost }}원</span>
-      <span class="product-desc">{{ product.desc }}</span>
+      <div class="product-wrapper">
+        <a href="">
+          <img
+            :src="product.thumb"
+            alt="상품 썸네일"
+            class="product-card-thumb"
+          />
+        </a>
+      </div>
+      <div class="product-content">
+        <span class="product-name">{{ product.name }}</span>
+        <span class="product-cost">{{ product.cost }}원</span>
+        <span class="product-desc">{{ product.desc }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -41,25 +51,44 @@
       position: relative;
       width: 250px;
       height: 450px;
-      margin: 0 39px;
-      .product-card-thumb {
-        width: 100%;
+      padding: 0 39px;
+      .product-wrapper {
+        width: 250px;
+        height: 322px;
+        overflow: hidden;
         margin-bottom: 10px;
+        .product-card-thumb {
+          width: 100%;
+        }
+        &:hover {
+          .product-card-thumb {
+            transform: scale(1.03);
+            transition: all 0.3s ease-in-out;
+          }
+        }
+        &:not(:hover) {
+          .product-card-thumb {
+            transition: all 0.3s ease-in-out;
+          }
+        }
       }
-      .product-name {
-        display: block;
-        height: 45px;
-      }
-      .product-cost {
-        display: block;
-        padding: 5px 0 0 0;
-        font-weight: 700;
-      }
-      .product-desc {
-        display: block;
-        padding: 5px 0 0 0;
-        font-size: 12px;
-        color: #c5c5c5;
+      .product-content {
+        .product-name {
+          display: block;
+          height: 45px;
+        }
+        .product-cost {
+          display: block;
+          padding: 5px 0 0 0;
+          font-weight: 700;
+        }
+        height: 40px;
+        .product-desc {
+          display: block;
+          padding: 5px 0 0 0;
+          font-size: 12px;
+          color: #c5c5c5;
+        }
       }
     }
   }
